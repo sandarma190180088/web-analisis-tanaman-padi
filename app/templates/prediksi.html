@@ -1,0 +1,85 @@
+{%include "header.html"%}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="text-center">
+                <h1>Prediksi Produksi Tanaman Padi</h1>
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- jquery validation -->
+                    <div class="card card-primary">
+
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form id="quickForm" method="post">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>Provinsi</label>
+                                    <select class="form-control select2" style="width: 100%;" name="provinsi">
+                                        {%for i in prov%}
+                                            <option>{{i}}</option>
+                                        {%endfor%}
+
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Luas Panen</label>
+                                    <input type="number" name="luas_panen" class="form-control" id="exampleInputEmail1"
+                                        placeholder="{{data_mean[0]}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Kelembapan</label>
+                                    <input type="number" name="kelembapan" class="form-control"
+                                        id="exampleInputPassword1" placeholder="{{data_mean[1]}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Suhu Rata-rata</label>
+                                    <input type="number" name="suhu_rata" class="form-control"
+                                        id="exampleInputPassword1" placeholder="{{data_mean[2]}}">
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-dark">Predict</button>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!--/.col (left) -->
+                <!-- right column -->
+                <div class="col-md-6">
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+            {%if hasil%}
+            <div class="jumbotron jumbotron-fluid bg-dark">
+                <div class="container">
+                    <h1 class="display-5 text-center">Hasil Prediksi : {{hasil}}</h1>
+
+                </div>
+            </div>
+            {%endif%}
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{%include "footer.html"%}
