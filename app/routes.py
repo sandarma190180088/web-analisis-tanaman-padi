@@ -56,9 +56,4 @@ def table_provinsi(provinsi):
     else:
         "Provinsi Tidak ditemukan"
 
-
-
-
-
-
     
