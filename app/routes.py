@@ -1,6 +1,7 @@
 from app import app,redirect,render_template,send_from_directory,send_file,request
 import pandas as pd
 from babel import numbers
+import numpy as np
 
 
 
@@ -48,11 +49,24 @@ def report():
 @app.route('/table/<provinsi>')
 def table_provinsi(provinsi):
     pr = str(provinsi).title()
-    data = df[df['Provinsi'] == pr]
     
     if provinsi:
-        
-        return render_template('tables.html',data=data,total=len(data),title=provinsi)
+        if provinsi == 'total_produksi':
+            provinsi = {}
+            
+
+            for p in df_de.Provinsi.unique():
+                produksi = df_de[df_de['Provinsi'] == p]['Produksi']
+                rata_rata = convert(np.mean(produksi))
+                total_produksi = convert(sum(produksi))
+
+                provinsi[p] = [rata_rata,total_produksi] 
+
+            
+            return render_template('tables_total_produksi.html',data=provinsi,title="Total Produksi") 
+        else:
+            data = df[df['Provinsi'] == pr]
+            return render_template('tables.html',data=data,total=len(data),title=provinsi)
     else:
         "Provinsi Tidak ditemukan"
 

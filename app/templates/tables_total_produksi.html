@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables  ({{total}})</h1>
+                    <h1>Total Produksi (1993-2020)</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -43,25 +43,16 @@
                                 <thead>
                                     <tr>
                                         <th>Provinsi</th>
-                                        <th>Tahun</th>
-                                        <th>Produksi</th>
-                                        <th>Luas Panen</th>
-                                        <th>Curah Hujan</th>
-                                        <th>Kelembapan</th>
-                                        <th>Suhu Rata-rata</th>
+                                        <th>Total Produksi</th>
+                                        <th>Rata Rata Produksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {%for index,rows in data.iterrows()%}
+                                    {%for keys in data%}
                                     <tr>
-                                        <td>{{rows['Provinsi']}}</td>
-                                        <td>{{rows['Tahun']}}</td>
-                                        <td>{{rows['Produksi']}} ton</td>
-                                        <td>{{rows['Luas Panen']}} (ha)</td>
-                                        <td>{{rows['Curah hujan']}}</td>
-                                        <td>{{rows['Kelembapan']}}</td>
-                                        <td>{{rows['Suhu rata-rata']}}</td>
-
+                                        <td>{{keys}}</td>
+                                        <td>{{data[keys][1]}} Ton</td>
+                                        <td>{{data[keys][0]}} Ton</td>
 
 
                                     </tr>
