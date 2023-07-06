@@ -32,7 +32,7 @@
                                     <tr>
                                         <td>{{rows['Provinsi']}}</td>
                                         <td>{{rows['Tahun']}}</td>
-                                        <td>{{rows['Produksi']}} ton</td>
+                                        <td>{{rows['Produksi']}} Kg</td>
                                         <td>{{rows['Luas Panen']}} (ha)</td>
                                         <td>{{rows['Curah hujan']}}</td>
                                         <td>{{rows['Kelembapan']}}</td>
@@ -52,19 +52,19 @@
                 <h1>Grafik</h1>
 
             </div>
-            {%include 'pages/'+pages[3]%}
+            {%include pages[3]%}
             <div>
                 <p class="lead text-center bg-secondary">Mean : {{info['mean_luas_panen']}} | Max : {{info['mean_luas_panen']}} | Min : {{info['mean_luas_panen']}}</p>
             </div>
-            {%include 'pages/'+pages[0]%}
+            {%include pages[0]%}
             <div>
                 <p class="lead text-center bg-secondary">Mean : {{info['mean_curah_hujan']}} | Max : {{info['maks_curah_hujan']}} | Min : {{info['min_curah_hujan']}}</p>
             </div>
-            {%include 'pages/'+pages[1]%}
+            {%include pages[1]%}
             <div>
                 <p class="lead text-center bg-secondary">Mean : {{info['mean_kelembapan']}} | Max : {{info['maks_kelembapan']}} | Min : {{info['min_kelembapan']}}</p>
             </div>
-            {%include 'pages/'+pages[2]%}
+            {%include pages[2]%}
             <div>
                 <p class="lead text-center bg-secondary">Mean : {{info['mean_suhu']}} | Max : {{info['maks_suhu']}} | Min : {{info['min_suhu']}}</p>
             </div>

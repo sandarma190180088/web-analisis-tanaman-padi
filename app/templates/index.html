@@ -60,14 +60,14 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>3.03<sup style="font-size: 20px">%</sup></h3>
+              <h3>1.46<sup style="font-size: 20px">%</sup></h3>
 
-              <p>Riau</p>
+              <p>Kepulauan Riau</p>
             </div>
             <div class="icon">
               <i class="ion ion-alert-circled"></i>
             </div>
-            <a href="analisis_data_provinsi/riau" class="small-box-footer">More info <i
+            <a href="analisis_data_provinsi/kepri" class="small-box-footer">More info <i
                 class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
@@ -76,9 +76,9 @@
           <!-- small box -->
           <div class="small-box bg-dark">
             <div class="inner">
-              <h3>DataPrep</h3>
+              <h3>Prediksi</h3>
 
-              <p>Export Analisis Data</p>
+              <p>Prediksi Data Produksi</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -99,15 +99,18 @@
           <!-- Custom tabs (Charts with tabs)-->
           <div class="card">
             <div class="card-header">
+              <a class='text-dark' 
+                href="/view/scatter_plot">
               <h3 class="card-title">
                 <i class="ion ion-disc"></i>
                 Scatter Plot
               </h3>
+              </a>
 
             </div><!-- /.card-header -->
             <div class="card-body">
               <div class="tab-content p-0">
-                {%include 'plot1.html'%}
+                {%include 'grafik/scatter_plot.html'%}
               </div>
             </div>
           </div>
@@ -209,15 +212,14 @@
 
       <div class="row">
         <div class="col-md-12">
-          {%include 'pages/produksi_padi.html'%}
           <br>
         </div>
         <div class="col-md-12">
-          {%include 'pages/pie_chart.html'%}
+          {%include 'grafik/persentasi_distribusi.html'%}
           <br>
         </div>
         <div class="col-md-12">
-          {%include 'pages/produksi_padi_tahun.html'%}
+          {%include 'grafik/time_series.html'%}
           <br>
         </div>
         <div class="col-md-12">

@@ -2,7 +2,7 @@ from . import app,render_template,request,df,pd,request,convert
 from .routes import pd
 import numpy as np
 
-df = pd.read_csv('Data_Tanaman_Padi.csv')
+df = pd.read_csv('data_lengkap.csv')
 
 class Neural_Network(object):
   def __init__(self):
@@ -62,7 +62,8 @@ def hitung_prediksi(provinsi,suhu_rata,kelembapan,luas_panen):
   for i in range(1000):
     NN.train(X_scaler,y_scaler)
   hasil = NN.forward(X_test_scaler)[0][0]
-  return f'{convert(hasil*max(y_train)[0])} Ton / Tahun'
+  
+  return f'{convert(hasil*max(y_train)[0])} Kg / Tahun'
 
 
 
