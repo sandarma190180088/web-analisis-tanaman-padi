@@ -1,6 +1,9 @@
 from . import app,render_template,request,df,pd,request,convert
 from .routes import pd
 import numpy as np
+import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly
 
 df = pd.read_csv('data_lengkap.csv')
 
@@ -49,9 +52,9 @@ class Neural_Network(object):
 def backpropagation():
   return render_template('backprop.html',title='Backpropagation')
 
-def hitung_prediksi(provinsi,suhu_rata,kelembapan,luas_panen):
+def hitung_prediksi(provinsi,X):
   prov = df[df['Provinsi'] == provinsi]
-  X_test = np.array([[luas_panen,kelembapan,suhu_rata]])
+  X_test = X
   X_train = prov[['Luas Panen','Kelembapan','Suhu rata-rata']].values
   y_train = prov[['Produksi']].values
   X_scaler = X_train/np.amax(X_train, axis=0) 
@@ -61,11 +64,29 @@ def hitung_prediksi(provinsi,suhu_rata,kelembapan,luas_panen):
   NN = Neural_Network()
   for i in range(1000):
     NN.train(X_scaler,y_scaler)
-  hasil = NN.forward(X_test_scaler)[0][0]
+  hasil = NN.forward(X_test_scaler)
   
-  return f'{convert(hasil*max(y_train)[0])} Kg / Tahun'
+  return hasil*max(y_train)
 
 
+@app.route('/prediksitahun',methods=['GET','POST'])
+def prediksi_():
+    if request.method == 'POST':
+        provinsi = request.form['provinsi']
+        X = np.random.rand(4,3)
+        hasil = hitung_prediksi(provinsi,X)
+        X = ['2021','2022','2023','2024']
+        hasil = [i[0] for i in hasil]
+        hasil = pd.DataFrame({'Tahun':X,'Prediksi':hasil})
+
+        fig = px.line(x = hasil['Tahun'], y =hasil['Prediksi'], template='plotly_dark', markers=True)
+        fig.update_layout(title=f'Prediksi Produksi di Provinsi {provinsi}  Dari Tahun 2021-2024',
+                   xaxis_title='Tahun',
+                   yaxis_title='Jumlah Produksi')
+        return fig.to_html()
+
+    prov = df["Provinsi"].unique()
+    return render_template('prediksi_.html',prov=prov,title='Prediksi 4 Tahun')
 
 @app.route('/prediksi',methods=['GET','POST'])
 def prediksi():
@@ -78,7 +99,10 @@ def prediksi():
     luas_panen = request.form['luas_panen']
     kelembapan = request.form['kelembapan']
     suhu_rata = request.form['suhu_rata']
-    hasil = hitung_prediksi(provinsi,float(suhu_rata),float(kelembapan),float(luas_panen))
+
+    X_test = np.array([[float(luas_panen),float(kelembapan),float(suhu_rata)]])
+    hasil = hitung_prediksi(provinsi,X_test)
+    hasil = f'{convert(hasil[0][0])} Kg / {convert(hasil[0][0] / 1000)} Ton'
     return render_template('prediksi.html',prov=data_prov,data_mean=dmean,hasil=hasil)
     
     
